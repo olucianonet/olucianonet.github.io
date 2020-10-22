@@ -1,3 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>oluciano.net</title><link href="https://oluciano.net/" rel="alternate"></link><link href="https://oluciano.net/feeds/all.atom.xml" rel="self"></link><id>https://oluciano.net/</id><updated>2020-10-14T17:00:00-03:00</updated><entry><title>Hello Pelican!</title><link href="https://oluciano.net/hello-pelican.html" rel="alternate"></link><published>2020-10-14T17:00:00-03:00</published><updated>2020-10-14T17:00:00-03:00</updated><author><name>Luciano</name></author><id>tag:oluciano.net,2020-10-14:/hello-pelican.html</id><summary type="html">&lt;p&gt;Um resumo sobre o post do Pelican&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Testando nosso primeiro post no Pelican&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>oluciano.net</title><link href="https://oluciano.net/" rel="alternate"></link><link href="https://oluciano.net/feeds/all.atom.xml" rel="self"></link><id>https://oluciano.net/</id><updated>2020-10-22T20:00:00-03:00</updated><entry><title>Capítulo 1</title><link href="https://oluciano.net/capitulo-01.html" rel="alternate"></link><published>2020-10-22T20:00:00-03:00</published><updated>2020-10-22T20:00:00-03:00</updated><author><name>Luciano</name></author><id>tag:oluciano.net,2020-10-22:/capitulo-01.html</id><summary type="html">&lt;p&gt;Resumo do capítulo 1 do livro &lt;a href="https://penseallen.github.io/PensePython2e/"&gt;&lt;strong&gt;Pense em Python 2d. de Allen B. Downey&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Capítulo 1:&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A habilidade específica mais importante de um cientista da computação é a resolução de problemas. Resolução de problemas significa a capacidade de formular problemas, pensar criativamente em soluções e expressar uma solução de forma clara e precisa. Assim, o processo de aprender a programar é uma oportunidade excelente para exercitar a habilidade de resolver problemas.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;1.1. O que é um programa&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Um programa é uma sequência de instruções que especifica como executar uma operação de computação. &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Instruções em comum nas linguagens de programação&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;entrada&lt;/li&gt;
+&lt;li&gt;saída&lt;/li&gt;
+&lt;li&gt;matemática&lt;/li&gt;
+&lt;li&gt;execução condicional&lt;/li&gt;
+&lt;li&gt;repetição&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;...programar é o processo de quebrar uma tarefa grande e complexa em subtarefas cada vez menores, até que estas sejam simples o suficiente para serem executadas por uma dessas instruções básicas.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;1.2. Execução Python&lt;/h1&gt;
+&lt;p&gt;Formas de executar Python:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Navegador&lt;/li&gt;
+&lt;li&gt;Interpretador&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;1.3. O primeiro programa&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Hello World&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;1.4. Operadores aritméticos&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;1.5. Valores e tipos&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;str, int, float, &lt;/li&gt;
+&lt;li&gt;Para saber o valor de um dado:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;type&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;lt;class &lt;span class="s1"&gt;&amp;#39;int&amp;#39;&lt;/span&gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;1.6. Linguagens formais e naturais&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Regras de sintaxe&lt;/li&gt;
+&lt;li&gt;Características:&lt;ul&gt;
+&lt;li&gt;Inequívocas&lt;/li&gt;
+&lt;li&gt;Concisas&lt;/li&gt;
+&lt;li&gt;Significado restrito&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;1.7. Depuração&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Processo de rastrear erros de programação&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Aprender a depurar erros pode ser frustrante, mas é uma habilidade valiosa, útil para muitas atividades além da programação. &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;1.8. Exercícios&lt;/h1&gt;
+&lt;p&gt;1.1. Em uma instrução print, o que acontece se você omitir um dos parênteses ou ambos?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Hello World&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;O interpretador enterá que a instrução não foi fechada e a cada enter para a execução do comando uma nova linha será criada no interpretador.&lt;/p&gt;
+&lt;p&gt;Ou receberá um erro de sintaxe.&lt;/p&gt;
+&lt;p&gt;1.2. Se estiver tentando imprimir uma string, o que acontece se omitir uma das aspas ou ambas?&lt;/p&gt;
+&lt;p&gt;Erro de sintaxe.&lt;/p&gt;
+&lt;p&gt;1.3. Você pode usar um sinal de menos para fazer um número negativo como -2. O que acontece se puser um sinal de mais antes de um número? E se escrever assim: 2++2?&lt;/p&gt;
+&lt;p&gt;O interpretador entenderá que o primeiro sinal é o operador e o segundo é indicando o número positivo.&lt;/p&gt;
+&lt;p&gt;1.4. Na notação matemática, zeros à esquerda são aceitáveis, como em 02. O que acontece se você tentar usar isso no Python?&lt;/p&gt;
+&lt;p&gt;Erro de sintaxe.&lt;/p&gt;
+&lt;p&gt;1.5. O que acontece se você tiver dois valores sem nenhum operador entre eles?&lt;/p&gt;
+&lt;p&gt;Erro de sintaxe.&lt;/p&gt;
+&lt;p&gt;2.1. Inicialize o interpretador do Python e use-o como uma calculadora.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;Python 3.7.3 (default, Jul 25 2020, 13:03:44) &lt;/span&gt;
+&lt;span class="err"&gt;[GCC 8.3.0] on linux&lt;/span&gt;
+&lt;span class="err"&gt;Type &amp;quot;help&amp;quot;, &amp;quot;copyright&amp;quot;, &amp;quot;credits&amp;quot; or &amp;quot;license&amp;quot; for more information.&lt;/span&gt;
+&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2.2. Quantos segundos há em 42 minutos e 42 segundos?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;                                                          
+&lt;span class="mi"&gt;2562&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2.3. Quantas milhas há em 10 quilômetros? Dica: uma milha equivale a 1,61 quilômetro.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1.61&lt;/span&gt;                                                                
+&lt;span class="mf"&gt;6.211180124223602&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2.4. Se você correr 10 quilômetros em 42 minutos e 42 segundos, qual é o seu passo médio (tempo por milha em minutos e segundos)? Qual é a sua velocidade média em milhas por hora?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# Passo médio em minutos&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tempo_em_minutos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tempo_em_minutos&lt;/span&gt;
+&lt;span class="mf"&gt;42.7&lt;/span&gt;              
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;deslocamento_em_m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1.61&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;passo_medio_em_m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;deslocamento_em_m&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;tempo_em_minutos&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;passo_medio_em_m&lt;/span&gt;
+&lt;span class="mf"&gt;0.14546089283896022&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# Passo médio em segundos&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tempo_em_segundos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tempo_em_segundos&lt;/span&gt;
+&lt;span class="mi"&gt;2562&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;passo_medio_em_s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;deslocamento_em_m&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;tempo_em_segundos&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;passo_medio_em_s&lt;/span&gt;
+&lt;span class="mf"&gt;0.0024243482139826703&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;# Velocidade média em milhas/horas&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;deslocamento_em_m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mf"&gt;1.61&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;deslocamento_em_m&lt;/span&gt;
+&lt;span class="mf"&gt;6.211180124223602&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tempo_em_segundos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;42&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tempo_em_segundos&lt;/span&gt;
+&lt;span class="mi"&gt;2562&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tempo_em_horas&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tempo_em_segundos&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tempo_em_horas&lt;/span&gt;                          
+&lt;span class="mf"&gt;0.7116666666666667&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;velocidade_media_em_m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;deslocamento_em_m&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;tempo_em_horas&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;velocidade_media_em_m&lt;/span&gt;
+&lt;span class="mf"&gt;8.727653570337614&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="pense_em_python"></category></entry><entry><title>Hello Pelican!</title><link href="https://oluciano.net/hello-pelican.html" rel="alternate"></link><published>2020-10-14T17:00:00-03:00</published><updated>2020-10-14T17:00:00-03:00</updated><author><name>Luciano</name></author><id>tag:oluciano.net,2020-10-14:/hello-pelican.html</id><summary type="html">&lt;p&gt;Um resumo sobre o post do Pelican&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Testando nosso primeiro post no Pelican&lt;/h1&gt;
 &lt;p&gt;Pelican é um gerador de páginas estáticas, criado em Python.&lt;/p&gt;</content><category term="Python"></category><category term="pelican"></category><category term="markdown"></category></entry></feed>
