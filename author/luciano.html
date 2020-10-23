@@ -1,69 +1,221 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-        <title>oluciano.net - Articles by Luciano</title>
         <meta charset="utf-8" />
         <meta name="generator" content="Pelican" />
-        <link href="https://oluciano.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="oluciano.net Full Atom Feed" />
-
-        <link rel="stylesheet" href="https://oluciano.net/theme/css/rdark.css" />
-	<link rel="stylesheet" type="text/css" href="https://oluciano.net/theme/css/main.css" />
-        <link href="https://oluciano.net/" type="application/atom+xml" rel="alternate" title="oluciano.net ATOM Feed" /><!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	
-<!-- Using MathJax, with the delimiters $ -->
-<!-- Conflict with pygments for the .mo and .mi -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-  "HTML-CSS": {
-  styles: {
-  ".MathJax .mo, .MathJax .mi": {color: "black ! important"}}
-  },
-  tex2jax: {inlineMath: [['$','$'], ['\\\\(','\\\\)']],processEscapes: true}
-  });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-</head>
+        <title>oluciano.net - Luciano</title>
+        <link rel="stylesheet" href="https://oluciano.net/theme/css/main.css" />
+        <link href="https://oluciano.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="oluciano.net Atom Feed" />
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
                 <h1><a href="https://oluciano.net/">oluciano.net</a></h1>
+                <nav><ul>
+                    <li><a href="https://oluciano.net/category/python.html">Python</a></li>
+                </ul></nav>
         </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="https://oluciano.net/category/python.html">Python</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content">
-<h2>Articles by Luciano</h2>
 
-<ol id="post-list">
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="https://oluciano.net/capitulo-01.html" rel="bookmark" title="Permalink to Capítulo 1">Capítulo 1</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2020-10-22T20:00:00-03:00"> qui 22 outubro 2020 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="https://oluciano.net/author/luciano.html">Luciano</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>Resumo do capítulo 1 do livro <a href="https://penseallen.github.io/PensePython2e/"><strong>Pense em Python 2d. de Allen B. Downey</strong></a></p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="https://oluciano.net/hello-pelican.html" rel="bookmark" title="Permalink to Hello Pelican!">Hello Pelican!</a></h2> </header>
-                <footer class="post-info">
-                    <time class="published" datetime="2020-10-14T17:00:00-03:00"> qua 14 outubro 2020 </time>
-                    <address class="vcard author">By
-                        <a class="url fn" href="https://oluciano.net/author/luciano.html">Luciano</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>Um resumo sobre o post do Pelican</p> </div><!-- /.entry-content -->
-        </article></li>
-</ol><!-- /#posts-list -->
-</section><!-- /#content -->
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="https://oluciano.net/capitulo-01.html">Capítulo 1</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2020-10-22T20:00:00-03:00">
+                Published: qui 22 outubro 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://oluciano.net/author/luciano.html">Luciano</a>
+        </address>
+<p>In <a href="https://oluciano.net/category/python.html">Python</a>.</p>
+<p>tags: <a href="https://oluciano.net/tag/python.html">python</a> <a href="https://oluciano.net/tag/pense_em_python.html">pense_em_python</a> </p>
+</footer><!-- /.post-info --><h1>Capítulo 1:</h1>
+<blockquote>
+<p>A habilidade específica mais importante de um cientista da computação é a resolução de problemas. Resolução de problemas significa a capacidade de formular problemas, pensar criativamente em soluções e expressar uma solução de forma clara e precisa. Assim, o processo de aprender a programar é uma oportunidade excelente para exercitar a habilidade de resolver problemas.</p>
+</blockquote>
+<h1>1.1. O que é um programa</h1>
+<blockquote>
+<p>Um programa é uma sequência de instruções que especifica como executar uma operação de computação. </p>
+</blockquote>
+<p>Instruções em comum nas linguagens de programação</p>
+<ul>
+<li>entrada</li>
+<li>saída</li>
+<li>matemática</li>
+<li>execução condicional</li>
+<li>repetição</li>
+</ul>
+<blockquote>
+<p>...programar é o processo de quebrar uma tarefa grande e complexa em subtarefas cada vez menores, até que estas sejam simples o suficiente para serem executadas por uma dessas instruções básicas.</p>
+</blockquote>
+<h1>1.2. Execução Python</h1>
+<p>Formas de executar Python:</p>
+<ul>
+<li>Navegador</li>
+<li>Interpretador</li>
+</ul>
+<h1>1.3. O primeiro programa</h1>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>1.4. Operadores aritméticos</h1>
+<div class="highlight"><pre><span></span><span class="o">+</span> <span class="o">-</span> <span class="o">/</span> <span class="o">*</span> <span class="o">**</span> <span class="o">^</span> 
+</pre></div>
+
+
+<h1>1.5. Valores e tipos</h1>
+<ul>
+<li>str, int, float, </li>
+<li>Para saber o valor de um dado:</li>
+</ul>
+<div class="highlight"><pre><span></span>type<span class="o">(</span><span class="m">2</span><span class="o">)</span>
+&lt;class <span class="s1">&#39;int&#39;</span>&gt;
+</pre></div>
+
+
+<h1>1.6. Linguagens formais e naturais</h1>
+<ul>
+<li>Regras de sintaxe</li>
+<li>Características:<ul>
+<li>Inequívocas</li>
+<li>Concisas</li>
+<li>Significado restrito</li>
+</ul>
+</li>
+</ul>
+<h1>1.7. Depuração</h1>
+<ul>
+<li>Processo de rastrear erros de programação</li>
+</ul>
+<blockquote>
+<p>Aprender a depurar erros pode ser frustrante, mas é uma habilidade valiosa, útil para muitas atividades além da programação. </p>
+</blockquote>
+<h1>1.8. Exercícios</h1>
+<p>1.1. Em uma instrução print, o que acontece se você omitir um dos parênteses ou ambos?</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span>
+</pre></div>
+
+
+<p>O interpretador enterá que a instrução não foi fechada e a cada enter para a execução do comando uma nova linha será criada no interpretador.</p>
+<p>Ou receberá um erro de sintaxe.</p>
+<p>1.2. Se estiver tentando imprimir uma string, o que acontece se omitir uma das aspas ou ambas?</p>
+<p>Erro de sintaxe.</p>
+<p>1.3. Você pode usar um sinal de menos para fazer um número negativo como -2. O que acontece se puser um sinal de mais antes de um número? E se escrever assim: 2++2?</p>
+<p>O interpretador entenderá que o primeiro sinal é o operador e o segundo é indicando o número positivo.</p>
+<p>1.4. Na notação matemática, zeros à esquerda são aceitáveis, como em 02. O que acontece se você tentar usar isso no Python?</p>
+<p>Erro de sintaxe.</p>
+<p>1.5. O que acontece se você tiver dois valores sem nenhum operador entre eles?</p>
+<p>Erro de sintaxe.</p>
+<p>2.1. Inicialize o interpretador do Python e use-o como uma calculadora.</p>
+<div class="highlight"><pre><span></span><span class="err">Python 3.7.3 (default, Jul 25 2020, 13:03:44) </span>
+<span class="err">[GCC 8.3.0] on linux</span>
+<span class="err">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="err">&gt;&gt;&gt; </span>
+</pre></div>
+
+
+<p>2.2. Quantos segundos há em 42 minutos e 42 segundos?</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="mi">42</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="mi">42</span>                                                          
+<span class="mi">2562</span>
+</pre></div>
+
+
+<p>2.3. Quantas milhas há em 10 quilômetros? Dica: uma milha equivale a 1,61 quilômetro.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">10</span> <span class="o">/</span> <span class="mf">1.61</span>                                                                
+<span class="mf">6.211180124223602</span>
+</pre></div>
+
+
+<p>2.4. Se você correr 10 quilômetros em 42 minutos e 42 segundos, qual é o seu passo médio (tempo por milha em minutos e segundos)? Qual é a sua velocidade média em milhas por hora?</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="c1"># Passo médio em minutos</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempo_em_minutos</span> <span class="o">=</span> <span class="mi">42</span> <span class="o">+</span> <span class="p">(</span><span class="mi">42</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempo_em_minutos</span>
+<span class="mf">42.7</span>              
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deslocamento_em_m</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mf">1.61</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">passo_medio_em_m</span> <span class="o">=</span> <span class="n">deslocamento_em_m</span> <span class="o">/</span> <span class="n">tempo_em_minutos</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">passo_medio_em_m</span>
+<span class="mf">0.14546089283896022</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Passo médio em segundos</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempo_em_segundos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">42</span><span class="p">)</span> <span class="o">+</span> <span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempo_em_segundos</span>
+<span class="mi">2562</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">passo_medio_em_s</span> <span class="o">=</span> <span class="n">deslocamento_em_m</span> <span class="o">/</span> <span class="n">tempo_em_segundos</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">passo_medio_em_s</span>
+<span class="mf">0.0024243482139826703</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Velocidade média em milhas/horas</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deslocamento_em_m</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mf">1.61</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">deslocamento_em_m</span>
+<span class="mf">6.211180124223602</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempo_em_segundos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">42</span><span class="p">)</span> <span class="o">+</span> <span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempo_em_segundos</span>
+<span class="mi">2562</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempo_em_horas</span> <span class="o">=</span> <span class="n">tempo_em_segundos</span> <span class="o">/</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tempo_em_horas</span>                          
+<span class="mf">0.7116666666666667</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">velocidade_media_em_m</span> <span class="o">=</span> <span class="n">deslocamento_em_m</span> <span class="o">/</span> <span class="n">tempo_em_horas</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">velocidade_media_em_m</span>
+<span class="mf">8.727653570337614</span>
+</pre></div>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="https://oluciano.net/hello-pelican.html" rel="bookmark"
+                           title="Permalink to Hello Pelican!">Hello Pelican!</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-10-14T17:00:00-03:00">
+                Published: qua 14 outubro 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://oluciano.net/author/luciano.html">Luciano</a>
+        </address>
+<p>In <a href="https://oluciano.net/category/python.html">Python</a>.</p>
+<p>tags: <a href="https://oluciano.net/tag/pelican.html">pelican</a> <a href="https://oluciano.net/tag/markdown.html">markdown</a> </p>
+</footer><!-- /.post-info -->                <p>Um resumo sobre o post do Pelican</p>
+                <a class="readmore" href="https://oluciano.net/hello-pelican.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://getpelican.com/">Pelican</a></li>
+                            <li><a href="https://www.python.org/">Python.org</a></li>
+                            <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="https://oluciano.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
-                Proudly powered by <a href="https://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
                 </address><!-- /#about -->
+
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
         </footer><!-- /#contentinfo -->
+
 </body>
 </html>
