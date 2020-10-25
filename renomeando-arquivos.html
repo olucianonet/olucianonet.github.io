@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>    Renomeando arquivos
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic|Merriweather:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://oluciano.net/theme/css/cid.css">
+        <link href="https://oluciano.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="oluciano.net Atom Feed" />
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+            <div class="container">
+
+<header class="blog-header">
+    <h1><a href="https://oluciano.net">oluciano.net</a></h1>
+    <p></p>
+    <nav>
+        <a href="https://oluciano.net/">INDEX</a>
+        <a href="https://oluciano.net/archives">ARCHIVES</a>
+        <a href="https://oluciano.net/categories">CATEGORIES</a>
+    </nav>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>Renomeando arquivos</h1>
+            <p class="date">Written on <time datetime="2020-10-24T00:00:00-03:00">out 24, 2020</time></p>
+        </header>
+
+        <article>
+            <h1>Hábitos</h1>
+<p>Não gosto muito fazer tarefas repetitivas, principalmente porque acredito que devemos sempre que possível otimizar a utilização do nosso tempo.</p>
+<p>Desta forma, quando me deparo com alguma rotina, sempre tento pensar em alguma
+forma de automatizá-la. </p>
+<p>Infelizmente, nem tudo tem como automatizar, mas para o que é possível, procuro fazê-lo.</p>
+<h1>A motivação</h1>
+<p>Existiam vários arquivos em uma estrutura de pasta onde por alguma razão, foram nomeados de forma errada.</p>
+<p>A estrutura de pastas se apresentava mais ou menos dessa forma (omiti os nomes reais por não terem relevância, já que o mais importante é a estrutura):</p>
+<div class="highlight"><pre><span></span>root_folder/
+├── <span class="m">1000</span> - main-folder1
+│   ├── sub_folder1
+│   │   ├── file-1.a
+│   │   └── file-2.b
+│   ├── sub_folder2
+│   │   ├── file-1.c
+│   │   ├── file-1.d
+│   │   ├── file-1.e
+│   │   ├── file-2.c
+│   │   ├── file-2.d
+│   │   └── file-2.e
+│   └── sub_folder3
+│       ├── file-1.a
+│       └── file-2.a
+├── <span class="m">2000</span> - main-folder2
+│   │ 
+</pre></div>
+
+
+<p>No exemplo, acima, temos um diretório raiz, <code>root_folder</code>, composto por um diretório principal e mais 3 subdiretórios. Com exceção do diretório raiz e principal, todos possuem algum tipo de arquivo.</p>
+<h2>O problema</h2>
+<p>No subdiretório 2, existiam alguns arquivos que precisavam ser renomeados, adicionando como prefixo aos seus nomes originais, o código existente no respectivo diretório principal. Ou seja, de <code>file-1.c</code> para <code>1000_file-1.c</code>.</p>
+<p>Somente os arquivos com a extensão <code>c</code>, <code>d</code> e <code>e</code> seriam renomeados.</p>
+<p>Não seria tão complicado adicionar manualmente o código a esses arquivos, porém existiam vários diretórios principais e assim, teria que entrar em cada um verificar o código e nomear os arquivos dos subdiretórios 2 de cada diretório principal</p>
+<h2>A solução</h2>
+<p>Imaginei que Python poderia ter em suas <em>libs</em> de manipulação de diretórios, alguma funcionalidade capaz de caminhar recursivamente na estrutura, identificando todos os arquivos com a extensão alvo e alterar seus nomes.</p>
+<h3>O padrão</h3>
+<p>Procurei identificar algum padrão nessa estrutura que pudesse utilizar como guia para:</p>
+<ul>
+<li>identificar os diretórios principais;</li>
+<li>coletar o código do prefixo;</li>
+<li>identificar os arquivos com as extensões desejadas;</li>
+<li>alterar seus nomes, adicionando como prefixo o código anteriormente coletado.</li>
+</ul>
+<p>Nesse momento, pensei que além da <em>lib</em> de manipulação de diretórios, poderia ser interessante utilizar também a <em>lib</em> de expressões regulares (<em>regex</em>), já que existiam alguns padrões a serem identificados.</p>
+<h3>O código</h3>
+<p>Inicialmente, tentei localizar o arquivos desejados, sem alterar seus nomes.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+
+    <span class="n">extensions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">cur</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">extensions</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;File: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_file</span><span class="p">))</span>
+</pre></div>
+
+
+<p>No código acima, primeiramente importo o módulo <code>os</code> que proporcionará as funcionalidades de manipulação de diretórios, como o <code>walk</code>.</p>
+<p>Já na função <code>main</code>, defini que ela receberá como parâmetro o caminho do diretório raiz, a ser passado por linha de comando. </p>
+<p>Em seguida, defini uma tupla que contém todas as extensões procuradas. Logo mais, utilizarei essa tupla para filtrar os arquivos desejados, com o método <code>str.endswith</code>.</p>
+<p>Entre todas os recursos utilizados até agora, a principal linha de código é: </p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">cur</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</pre></div>
+
+
+<p>Essa linha, retorna recursivamente, o diretório atual (<code>cur</code>), uma lista de seus diretórios (<code>dirs</code>) e uma lista de seus arquivos (<code>files</code>).</p>
+<p>Com isso, é possível ir iterando sobre cada elemento de cada lista até chegar ao fim da estrutura. A ordem de iteração também pode ser específicada.</p>
+<p>Abaixo, um trecho da documentação do método:</p>
+<blockquote>
+<p><a href="https://docs.python.org/3/library/os.html#os.walk">os.<strong>walk</strong>(<em>top, topdown=True, onerror=None, followlinks=False</em>) <br><em>Generate the file names in a directory tree by walking the tree either top-down or bottom-up. For each directory in the tree rooted at directory top (including top itself), it yields a 3-tuple (dirpath, dirnames, filenames).</em>
+</a></p>
+</blockquote>
+<p>Legal, mas o objetivo é renomear os arquivos alvos. Então vamos recuperar o código do prefixo e alterar o nome dos arquivos.</p>
+<p>Assim, considerando que a variável <code>cur</code> é sempre o diretório atual, a tarefa seria extrair os 4 primeiros dígitos do diretório e atribui-los a uma variável representando o prefixo.</p>
+<p>Mas antes de realmente alterar os nomes dos arquivos, vou imprimir os valores para conferir se a lógica está correta. </p>
+<div class="highlight"><pre><span></span>    <span class="c1"># ...</span>
+    <span class="k">for</span> <span class="n">cur</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">extensions</span><span class="p">):</span>
+                <span class="n">preffix</span> <span class="o">=</span> <span class="n">cur</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Prefix: </span><span class="si">{0}</span><span class="s1">, File: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">preffix</span><span class="p">,</span> <span class="n">_file</span><span class="p">))</span>
+</pre></div>
+
+
+<p>A saída desse código foi a seguinte:</p>
+<div class="highlight"><pre><span></span>Prefix: root, File: file-1.d
+Prefix: root, File: file-1.e
+Prefix: root, File: file-1.c
+Prefix: root, File: file-2.d
+Prefix: root, File: file-2.c
+Prefix: root, File: file-2.e
+</pre></div>
+
+
+<p>Estranho né? Considerando que o nome do diretório é <code>1000 - main-folder1</code>, o retorno deveria ser a <em>string</em> <code>1000</code>.</p>
+<p>Sendo assim, vamos voltar ao código e adicionar uma linha para exibir o nome do diretório atual de cada loop.</p>
+<div class="highlight"><pre><span></span>    <span class="c1"># ...</span>
+        <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">extensions</span><span class="p">):</span>
+                <span class="n">preffix</span> <span class="o">=</span> <span class="n">cur</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cur</span><span class="p">))</span>
+</pre></div>
+
+
+<p>A saída desse código foi a seguinte:</p>
+<div class="highlight"><pre><span></span>root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+</pre></div>
+
+
+<p>Aí esta o problema. O caminho do diretório atual é composto por todos os diretórios pai, a partir do diretório root. Além disso, o código que queremos não está no diretório atual e sim no diretório pai do atual, um nível acima dos arquivos alvos.</p>
+<p>Olhando a saída, podemos perceber que existe um padrão entre todas as ocorrências, inclusive na quantidade de carateres. </p>
+<p>Desta forma, para recuperarmos o código desejado, seria só extrair da <em>string</em> a sequência desejada. Talvez utilizando o <em>slice</em> do python.</p>
+<p>Mas caso o nome variar, teremos um problema. Bom, nesse caso, acredito que seria interessante utilizarmos <em>regex</em>.</p>
+<blockquote>
+<p><a href="http://turing.com.br/material/regex/introducao.html"><em>Uma expressão regular é uma notação para representar padrões em strings. Serve para validar entradas de dados ou fazer busca e extração de informações em textos.</em></a></p>
+</blockquote>
+<p>Então, o objetivo agora, é definir uma notação que represente a <em>string</em> desejada, passá-la juntamente com o nome do diretório para o Python e deixar que ele se encarregue de fatiar e retornar a sequência alvo.</p>
+<p>Python tem uma <em>lib</em> específica para trabalharmos com <em>regex</em> e para utilizá-la é preciso importar o módulo <code>re</code>.</p>
+<p>OK, vamos implementar os recursos da <em>regex</em> em nosso código:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="c1"># ...</span>
+   <span class="n">code_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\d</span><span class="si">{4}</span><span class="s1">) -&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">cur</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">extensions</span><span class="p">):</span>
+                <span class="n">preffix</span> <span class="o">=</span> <span class="n">code_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Prefix: </span><span class="si">{0}</span><span class="s1">, File: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preffix</span><span class="p">),</span> <span class="n">_file</span><span class="p">))</span>
+</pre></div>
+
+
+<p>A saída desse código é:</p>
+<div class="highlight"><pre><span></span>Prefix: <span class="m">1000</span>, File: file-1.d
+Prefix: <span class="m">1000</span>, File: file-1.e
+Prefix: <span class="m">1000</span>, File: file-1.c
+Prefix: <span class="m">1000</span>, File: file-2.d
+Prefix: <span class="m">1000</span>, File: file-2.c
+Prefix: <span class="m">1000</span>, File: file-2.e
+</pre></div>
+
+
+<p>No código acima, foi adicionada a instrução <code>re.compile(r'(\d{4}) -')</code>, que define para o Python o padrão procurado e atribui à variável <code>code_pattern</code>. Somente na instrução <code>preffix = code_pattern.findall(cur)</code> solicitamos ao Python para procurar o padrão na <em>string</em> representando o diretório atual e atribuí-lo à variável <code>preffix</code>.</p>
+<p>Agora sim, é só concatenar o prefixo com o nome do arquivo e teremos nossa primeira versão funcional de <em>script</em> Python.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+
+    <span class="n">extensions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
+    <span class="n">code_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\d</span><span class="si">{4}</span><span class="s1">) -&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">cur</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">extensions</span><span class="p">):</span>
+                <span class="n">preffix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">code_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">cur</span><span class="p">))</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">_file</span><span class="p">),</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">preffix</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">_file</span><span class="p">])))</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                    <span class="s1">&#39;From: </span><span class="si">{0}</span><span class="s1">, to: </span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">_file</span><span class="p">),</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">preffix</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">_file</span><span class="p">]))</span>
+                <span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">(</span><span class="o">*</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+
+
+<p>Nessa versão completa do código, foi adicionada a instrução <code>os.rename</code>, que recebe o nome atual de um arquivo e o novo nome para renomeá-lo. Em seguida, a instrução <code>sys.stdout.write</code>, que escreve para a saída padrão a operação realizada na linha anterior.</p>
+<h1>Concluindo</h1>
+<p>Um dos objetivos desse post, era de apresentar algumas <em>libs</em> e recursos do Python. </p>
+<p>Apesar de simples e ainda precisando de melhorias, o script utilizou recursos de alguns módulos, como:</p>
+<ul>
+<li><code>os</code></li>
+<li><code>re</code></li>
+<li><code>sys</code></li>
+</ul>
+<p>Esses módulos possuem muitos outros recursos além dos apresentados aqui, e vamos tratá-los em outro momento.</p>
+<p>Por hora, como melhoria para esse código, fica a sugestão de refatoração, o que irá diminuir o já pequeno tamanho, além da utilização de outras <em>libs</em>.</p>
+<p>É isso.</p>
+        </article>
+
+        <footer>
+            <p>This entry is posted in <a href="https://oluciano.net/category/python.html">Python</a>.</p>
+        </footer>
+
+
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+    </ul>
+
+    <p class="disclaimer">
+    Built with <a href="http://getpelican.com">Pelican</a>, and <a href="https://github.com/hdra/Pelican-Cid">Cid</a> theme.
+    </p>
+</footer>
+            </div>
+    </body>
+</html>

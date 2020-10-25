@@ -1,5 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>oluciano.net - Python</title><link href="https://oluciano.net/" rel="alternate"></link><link href="https://oluciano.net/feeds/python.atom.xml" rel="self"></link><id>https://oluciano.net/</id><updated>2020-10-22T20:00:00-03:00</updated><entry><title>Capítulo 1</title><link href="https://oluciano.net/capitulo-01.html" rel="alternate"></link><published>2020-10-22T20:00:00-03:00</published><updated>2020-10-22T20:00:00-03:00</updated><author><name>Luciano</name></author><id>tag:oluciano.net,2020-10-22:/capitulo-01.html</id><summary type="html">&lt;p&gt;Resumo do capítulo 1 do livro &lt;a href="https://penseallen.github.io/PensePython2e/"&gt;&lt;strong&gt;Pense em Python 2d. de Allen B. Downey&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Capítulo 1:&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>oluciano.net - Python</title><link href="https://oluciano.net/" rel="alternate"></link><link href="https://oluciano.net/feeds/python.atom.xml" rel="self"></link><id>https://oluciano.net/</id><updated>2020-10-24T00:00:00-03:00</updated><entry><title>Renomeando arquivos</title><link href="https://oluciano.net/renomeando-arquivos.html" rel="alternate"></link><published>2020-10-24T00:00:00-03:00</published><updated>2020-10-24T00:00:00-03:00</updated><author><name>Luciano</name></author><id>tag:oluciano.net,2020-10-24:/renomeando-arquivos.html</id><summary type="html">&lt;p&gt;Como utilizei um simples scritp em python para renomear arquivos.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Hábitos&lt;/h1&gt;
+&lt;p&gt;Não gosto muito fazer tarefas repetitivas, principalmente porque acredito que devemos sempre que possível otimizar a utilização do nosso tempo.&lt;/p&gt;
+&lt;p&gt;Desta forma, quando me deparo com alguma rotina, sempre tento pensar em alguma
+forma de automatizá-la. &lt;/p&gt;
+&lt;p&gt;Infelizmente, nem tudo tem como automatizar, mas para o que é possível, procuro fazê-lo.&lt;/p&gt;
+&lt;h1&gt;A motivação&lt;/h1&gt;
+&lt;p&gt;Existiam vários arquivos em uma estrutura de pasta onde por alguma razão, foram nomeados de forma errada.&lt;/p&gt;
+&lt;p&gt;A estrutura de pastas se apresentava mais ou menos dessa forma (omiti os nomes reais por não terem relevância, já que o mais importante é a estrutura):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root_folder/
+├── &lt;span class="m"&gt;1000&lt;/span&gt; - main-folder1
+│   ├── sub_folder1
+│   │   ├── file-1.a
+│   │   └── file-2.b
+│   ├── sub_folder2
+│   │   ├── file-1.c
+│   │   ├── file-1.d
+│   │   ├── file-1.e
+│   │   ├── file-2.c
+│   │   ├── file-2.d
+│   │   └── file-2.e
+│   └── sub_folder3
+│       ├── file-1.a
+│       └── file-2.a
+├── &lt;span class="m"&gt;2000&lt;/span&gt; - main-folder2
+│   │ 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;No exemplo, acima, temos um diretório raiz, &lt;code&gt;root_folder&lt;/code&gt;, composto por um diretório principal e mais 3 subdiretórios. Com exceção do diretório raiz e principal, todos possuem algum tipo de arquivo.&lt;/p&gt;
+&lt;h2&gt;O problema&lt;/h2&gt;
+&lt;p&gt;No subdiretório 2, existiam alguns arquivos que precisavam ser renomeados, adicionando como prefixo aos seus nomes originais, o código existente no respectivo diretório principal. Ou seja, de &lt;code&gt;file-1.c&lt;/code&gt; para &lt;code&gt;1000_file-1.c&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Somente os arquivos com a extensão &lt;code&gt;c&lt;/code&gt;, &lt;code&gt;d&lt;/code&gt; e &lt;code&gt;e&lt;/code&gt; seriam renomeados.&lt;/p&gt;
+&lt;p&gt;Não seria tão complicado adicionar manualmente o código a esses arquivos, porém existiam vários diretórios principais e assim, teria que entrar em cada um verificar o código e nomear os arquivos dos subdiretórios 2 de cada diretório principal&lt;/p&gt;
+&lt;h2&gt;A solução&lt;/h2&gt;
+&lt;p&gt;Imaginei que Python poderia ter em suas &lt;em&gt;libs&lt;/em&gt; de manipulação de diretórios, alguma funcionalidade capaz de caminhar recursivamente na estrutura, identificando todos os arquivos com a extensão alvo e alterar seus nomes.&lt;/p&gt;
+&lt;h3&gt;O padrão&lt;/h3&gt;
+&lt;p&gt;Procurei identificar algum padrão nessa estrutura que pudesse utilizar como guia para:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;identificar os diretórios principais;&lt;/li&gt;
+&lt;li&gt;coletar o código do prefixo;&lt;/li&gt;
+&lt;li&gt;identificar os arquivos com as extensões desejadas;&lt;/li&gt;
+&lt;li&gt;alterar seus nomes, adicionando como prefixo o código anteriormente coletado.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Nesse momento, pensei que além da &lt;em&gt;lib&lt;/em&gt; de manipulação de diretórios, poderia ser interessante utilizar também a &lt;em&gt;lib&lt;/em&gt; de expressões regulares (&lt;em&gt;regex&lt;/em&gt;), já que existiam alguns padrões a serem identificados.&lt;/p&gt;
+&lt;h3&gt;O código&lt;/h3&gt;
+&lt;p&gt;Inicialmente, tentei localizar o arquivos desejados, sem alterar seus nomes.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="n"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;d&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;e&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dirs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;walk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;File: &lt;/span&gt;&lt;span class="si"&gt;{0}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;No código acima, primeiramente importo o módulo &lt;code&gt;os&lt;/code&gt; que proporcionará as funcionalidades de manipulação de diretórios, como o &lt;code&gt;walk&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Já na função &lt;code&gt;main&lt;/code&gt;, defini que ela receberá como parâmetro o caminho do diretório raiz, a ser passado por linha de comando. &lt;/p&gt;
+&lt;p&gt;Em seguida, defini uma tupla que contém todas as extensões procuradas. Logo mais, utilizarei essa tupla para filtrar os arquivos desejados, com o método &lt;code&gt;str.endswith&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Entre todas os recursos utilizados até agora, a principal linha de código é: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dirs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;walk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Essa linha, retorna recursivamente, o diretório atual (&lt;code&gt;cur&lt;/code&gt;), uma lista de seus diretórios (&lt;code&gt;dirs&lt;/code&gt;) e uma lista de seus arquivos (&lt;code&gt;files&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Com isso, é possível ir iterando sobre cada elemento de cada lista até chegar ao fim da estrutura. A ordem de iteração também pode ser específicada.&lt;/p&gt;
+&lt;p&gt;Abaixo, um trecho da documentação do método:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://docs.python.org/3/library/os.html#os.walk"&gt;os.&lt;strong&gt;walk&lt;/strong&gt;(&lt;em&gt;top, topdown=True, onerror=None, followlinks=False&lt;/em&gt;) &lt;br&gt;&lt;em&gt;Generate the file names in a directory tree by walking the tree either top-down or bottom-up. For each directory in the tree rooted at directory top (including top itself), it yields a 3-tuple (dirpath, dirnames, filenames).&lt;/em&gt;
+&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Legal, mas o objetivo é renomear os arquivos alvos. Então vamos recuperar o código do prefixo e alterar o nome dos arquivos.&lt;/p&gt;
+&lt;p&gt;Assim, considerando que a variável &lt;code&gt;cur&lt;/code&gt; é sempre o diretório atual, a tarefa seria extrair os 4 primeiros dígitos do diretório e atribui-los a uma variável representando o prefixo.&lt;/p&gt;
+&lt;p&gt;Mas antes de realmente alterar os nomes dos arquivos, vou imprimir os valores para conferir se a lógica está correta. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="c1"&gt;# ...&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dirs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;walk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;preffix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Prefix: &lt;/span&gt;&lt;span class="si"&gt;{0}&lt;/span&gt;&lt;span class="s1"&gt;, File: &lt;/span&gt;&lt;span class="si"&gt;{1}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;preffix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A saída desse código foi a seguinte:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Prefix: root, File: file-1.d
+Prefix: root, File: file-1.e
+Prefix: root, File: file-1.c
+Prefix: root, File: file-2.d
+Prefix: root, File: file-2.c
+Prefix: root, File: file-2.e
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Estranho né? Considerando que o nome do diretório é &lt;code&gt;1000 - main-folder1&lt;/code&gt;, o retorno deveria ser a &lt;em&gt;string&lt;/em&gt; &lt;code&gt;1000&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Sendo assim, vamos voltar ao código e adicionar uma linha para exibir o nome do diretório atual de cada loop.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="c1"&gt;# ...&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;preffix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{0}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A saída desse código foi a seguinte:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+root_folder/1000 - main-folder1/sub_folder2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Aí esta o problema. O caminho do diretório atual é composto por todos os diretórios pai, a partir do diretório root. Além disso, o código que queremos não está no diretório atual e sim no diretório pai do atual, um nível acima dos arquivos alvos.&lt;/p&gt;
+&lt;p&gt;Olhando a saída, podemos perceber que existe um padrão entre todas as ocorrências, inclusive na quantidade de carateres. &lt;/p&gt;
+&lt;p&gt;Desta forma, para recuperarmos o código desejado, seria só extrair da &lt;em&gt;string&lt;/em&gt; a sequência desejada. Talvez utilizando o &lt;em&gt;slice&lt;/em&gt; do python.&lt;/p&gt;
+&lt;p&gt;Mas caso o nome variar, teremos um problema. Bom, nesse caso, acredito que seria interessante utilizarmos &lt;em&gt;regex&lt;/em&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="http://turing.com.br/material/regex/introducao.html"&gt;&lt;em&gt;Uma expressão regular é uma notação para representar padrões em strings. Serve para validar entradas de dados ou fazer busca e extração de informações em textos.&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Então, o objetivo agora, é definir uma notação que represente a &lt;em&gt;string&lt;/em&gt; desejada, passá-la juntamente com o nome do diretório para o Python e deixar que ele se encarregue de fatiar e retornar a sequência alvo.&lt;/p&gt;
+&lt;p&gt;Python tem uma &lt;em&gt;lib&lt;/em&gt; específica para trabalharmos com &lt;em&gt;regex&lt;/em&gt; e para utilizá-la é preciso importar o módulo &lt;code&gt;re&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;OK, vamos implementar os recursos da &lt;em&gt;regex&lt;/em&gt; em nosso código:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+&lt;span class="c1"&gt;# ...&lt;/span&gt;
+   &lt;span class="n"&gt;code_pattern&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;(\d&lt;/span&gt;&lt;span class="si"&gt;{4}&lt;/span&gt;&lt;span class="s1"&gt;) -&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dirs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;walk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;preffix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;code_pattern&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Prefix: &lt;/span&gt;&lt;span class="si"&gt;{0}&lt;/span&gt;&lt;span class="s1"&gt;, File: &lt;/span&gt;&lt;span class="si"&gt;{1}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;preffix&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A saída desse código é:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Prefix: &lt;span class="m"&gt;1000&lt;/span&gt;, File: file-1.d
+Prefix: &lt;span class="m"&gt;1000&lt;/span&gt;, File: file-1.e
+Prefix: &lt;span class="m"&gt;1000&lt;/span&gt;, File: file-1.c
+Prefix: &lt;span class="m"&gt;1000&lt;/span&gt;, File: file-2.d
+Prefix: &lt;span class="m"&gt;1000&lt;/span&gt;, File: file-2.c
+Prefix: &lt;span class="m"&gt;1000&lt;/span&gt;, File: file-2.e
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;No código acima, foi adicionada a instrução &lt;code&gt;re.compile(r'(\d{4}) -')&lt;/code&gt;, que define para o Python o padrão procurado e atribui à variável &lt;code&gt;code_pattern&lt;/code&gt;. Somente na instrução &lt;code&gt;preffix = code_pattern.findall(cur)&lt;/code&gt; solicitamos ao Python para procurar o padrão na &lt;em&gt;string&lt;/em&gt; representando o diretório atual e atribuí-lo à variável &lt;code&gt;preffix&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Agora sim, é só concatenar o prefixo com o nome do arquivo e teremos nossa primeira versão funcional de &lt;em&gt;script&lt;/em&gt; Python.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="n"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;d&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;e&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;code_pattern&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;(\d&lt;/span&gt;&lt;span class="si"&gt;{4}&lt;/span&gt;&lt;span class="s1"&gt;) -&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dirs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;walk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;preffix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;code_pattern&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rename&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                    &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                    &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;preffix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;_&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="p"&gt;])))&lt;/span&gt;
+                &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                    &lt;span class="s1"&gt;&amp;#39;From: &lt;/span&gt;&lt;span class="si"&gt;{0}&lt;/span&gt;&lt;span class="s1"&gt;, to: &lt;/span&gt;&lt;span class="si"&gt;{1}&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                        &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                        &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;preffix&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;_&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_file&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+                &lt;span class="p"&gt;))&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Nessa versão completa do código, foi adicionada a instrução &lt;code&gt;os.rename&lt;/code&gt;, que recebe o nome atual de um arquivo e o novo nome para renomeá-lo. Em seguida, a instrução &lt;code&gt;sys.stdout.write&lt;/code&gt;, que escreve para a saída padrão a operação realizada na linha anterior.&lt;/p&gt;
+&lt;h1&gt;Concluindo&lt;/h1&gt;
+&lt;p&gt;Um dos objetivos desse post, era de apresentar algumas &lt;em&gt;libs&lt;/em&gt; e recursos do Python. &lt;/p&gt;
+&lt;p&gt;Apesar de simples e ainda precisando de melhorias, o script utilizou recursos de alguns módulos, como:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;os&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;re&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sys&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Esses módulos possuem muitos outros recursos além dos apresentados aqui, e vamos tratá-los em outro momento.&lt;/p&gt;
+&lt;p&gt;Por hora, como melhoria para esse código, fica a sugestão de refatoração, o que irá diminuir o já pequeno tamanho, além da utilização de outras &lt;em&gt;libs&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;É isso.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="os"></category><category term="regex"></category><category term="sys"></category></entry><entry><title>Capítulo 1</title><link href="https://oluciano.net/capitulo-01.html" rel="alternate"></link><published>2020-10-22T20:00:00-03:00</published><updated>2020-10-22T20:00:00-03:00</updated><author><name>Luciano</name></author><id>tag:oluciano.net,2020-10-22:/capitulo-01.html</id><summary type="html">&lt;p&gt;Resumo do capítulo 1 do livro &lt;a href="https://penseallen.github.io/PensePython2e/"&gt;&lt;strong&gt;Pense em Python 2d. de Allen B. Downey&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Capítulo 1:&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;A habilidade específica mais importante de um cientista da computação é a resolução de problemas. Resolução de problemas significa a capacidade de formular problemas, pensar criativamente em soluções e expressar uma solução de forma clara e precisa. Assim, o processo de aprender a programar é uma oportunidade excelente para exercitar a habilidade de resolver problemas.&lt;/p&gt;
 &lt;/blockquote&gt;
